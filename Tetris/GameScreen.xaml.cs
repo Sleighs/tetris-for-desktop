@@ -46,13 +46,12 @@ namespace Tetris
 
         private readonly Image[,] imageControls;
 
-        private GameState gameState = new GameState();
+        public GameState gameState = new GameState();
 
         public GameScreen()
         {
             InitializeComponent();
             imageControls = SetupGameCanvas(gameState.GameGrid);
-            this.Focus();
         }
 
         private Image[,] SetupGameCanvas(GameGrid grid)
@@ -132,7 +131,7 @@ namespace Tetris
             }
         }
 
-        private void Draw(GameState gameState)
+        public void Draw(GameState gameState)
         {
             DrawGrid(gameState.GameGrid);
             DrawGhostBlock(gameState.CurrentBlock);
@@ -158,12 +157,6 @@ namespace Tetris
             FinalScoreText.Text = $"Score: {gameState.Score}";
         }
 
-        private GameState GetGameState()
-        {
-            return gameState;
-        }
-       
-
         private async void GameCanvas_Loaded(object sender, RoutedEventArgs e)
         {
             await GameLoop();
@@ -177,90 +170,10 @@ namespace Tetris
         }
 
 
-        // Pause Menu Logic
-        private void PauseGame()
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            PauseMenu.Visibility = Visibility.Visible;
-            // Pause game logic here
+            this.Focus();
         }
 
-        private void ResumeGame_Click(object sender, RoutedEventArgs e)
-        {
-            PauseMenu.Visibility = Visibility.Collapsed;
-            // Resume game logic here
-        }
-
-        private void RestartGame_Click(object sender, RoutedEventArgs e)
-        {
-            PauseMenu.Visibility = Visibility.Collapsed;
-            // Restart game logic here
-        }
-
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            // Open settings window or panel here
-        }
-
-        private void QuitToMainMenu_Click(object sender, RoutedEventArgs e)
-        {
-            PauseMenu.Visibility = Visibility.Collapsed;
-
-            ((MainWindow)Window.GetWindow(this)).LoadMainMenu();
-        }
-
-
-        // Key Bindings
-        private void Window_KeyDown(object sender, KeyEventArgs e, GameState gameState)
-        {
-            Console.WriteLine($"Key pressed: {e.Key}");
-
-            if (gameState.GameOver)
-            {
-                return;
-            }
-
-            switch (e.Key)
-            {
-                case Key.Left:
-                    gameState.MoveBlockLeft();
-                    break;
-                case Key.Right:
-                    gameState.MoveBlockRight();
-                    break;
-                case Key.Down:
-                    gameState.MoveBlockDown();
-                    break;
-                case Key.Up:
-                    gameState.RotateBlockCW();
-                    break;
-                case Key.Z:
-                    gameState.RotateBlockCCW();
-                    break;
-                case Key.C:
-                    gameState.HoldBlock();
-                    break;
-                case Key.Space:
-                    gameState.DropBlock();
-                    break;
-                case Key.Escape:
-                    // Open pause menu
-                    if (PauseMenu.Visibility == Visibility.Collapsed)
-                    {
-                        PauseGame();
-                        return;
-                    }
-                    else
-                    {
-                        ResumeGame_Click(this, new RoutedEventArgs());
-                    }
-                    break;
-                default:
-                    return;
-            }
-
-            e.Handled = true;
-
-            Draw(gameState);
-        }
     }
 }
