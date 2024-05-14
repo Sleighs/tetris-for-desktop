@@ -30,13 +30,16 @@ namespace Tetris
         public GameGrid GameGrid { get; }
         public BlockQueue BlockQueue { get; }
 
+        public bool GameStart { get; private set; }
+
         public bool GameOver { get; private set; }
         public int Score { get; private set; }
         public Block HeldBlock { get; private set; }    
         public bool CanHold { get; private set; }
 
         // das and arr
-        public int ArrDelay {  get; private set; }
+        /*
+        public int ArrDelay { get; private set; }
         public int DasDelay { get; private set; }
 
         public bool isLeftPressed = false;
@@ -45,7 +48,8 @@ namespace Tetris
         private DateTime rightPressTime;
         public bool isDASActive = false;
         private DateTime lastAutoShiftTime;
-/*
+
+
         void Update() {
             DateTime currentTime = DateTime.Now;
 
@@ -103,6 +107,7 @@ namespace Tetris
             BlockQueue = new BlockQueue();
             CurrentBlock = BlockQueue.GetAndUpdate();
             CanHold = true;
+            GameStart = false;
         }
 
         private bool BlockFits()
