@@ -93,5 +93,17 @@
                     Click="PlayAgain_Click"/>
             </StackPanel>
         </Grid>
+
+        <Grid x:Name="PauseMenu" Visibility="Collapsed">
+            <Rectangle Fill="#7F000000" />
+            <!-- Semi-transparent black background -->
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Game Paused" Foreground="White" FontSize="24" Margin="0,0,0,20" HorizontalAlignment="Center" />
+                <Button Content="Resume Game" Width="200" Margin="10" Click="ResumeGame_Click"/>
+                <Button Content="Restart Game" Width="200" Margin="10" Click="RestartGame_Click"/>
+                <Button Content="Settings" Width="200" Margin="10" Click="Settings_Click"/>
+                <Button Content="Quit to Main Menu" Width="200" Margin="10" Click="QuitToMainMenu_Click"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

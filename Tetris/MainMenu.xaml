@@ -18,29 +18,25 @@
                     HorizontalAlignment="Center" 
                     Margin="10,10,0,0" 
                     VerticalAlignment="Top" 
-                    Width="100"
-                    Height="25"
+                    Width="200"
                     Click="StartGame_Click"/>
             <Button Content="High Scores"
                     HorizontalAlignment="Center" 
                     Margin="10,10,0,0" 
                     VerticalAlignment="Top" 
-                    Width="100"
-                    Height="25"
+                    Width="200"
                     Click="HighScores_Click"/>
             <Button Content="Options" 
                     HorizontalAlignment="Center" 
                     Margin="10,10,0,0" 
                     VerticalAlignment="Top" 
-                    Width="100"
-                    Height="25"
+                    Width="200"
                     Click="Settings_Click"/>
             <Button Content="Exit"
                     HorizontalAlignment="Center" 
                     Margin="10,10,0,0" 
                     VerticalAlignment="Top" 
-                    Width="100"
-                    Height="25"
+                    Width="200"
                     Click="ExitGame_Click"
                     />
         </StackPanel>

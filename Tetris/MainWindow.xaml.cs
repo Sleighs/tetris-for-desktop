@@ -30,17 +30,15 @@ namespace Tetris
             MainContent.Content = new MainMenu();
         }
 
-        
+ 
         public void StartGame()
         {
             MainContent.Content = new GameScreen(); // Switch to the game screen
         }
-        
 
-
-        private void Window_KeyDown()
+        private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-
+           
         }
     }
 }

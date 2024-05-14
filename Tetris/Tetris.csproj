@@ -51,4 +51,8 @@
     <Resource Include="Assets\TileYellow.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>

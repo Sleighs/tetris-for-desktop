@@ -9,9 +9,10 @@
         MinWidth="600" MinHeight="600"
         Foreground="White"
         FontFamily="Segoe UI Light" FontSize="28"
+        KeyDown="Window_KeyDown"
     >
     <Grid>
         <ContentControl Name="MainContent"/>
-        
+       
     </Grid>
 </Window>

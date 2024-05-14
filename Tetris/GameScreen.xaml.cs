@@ -189,7 +189,16 @@ namespace Tetris
                     break;
                 case Key.Escape:
                     // Open pause menu
+                    // pause game
 
+                    if (PauseMenu.Visibility == Visibility.Collapsed)
+                    {
+                        PauseGame();
+                    }     
+                    else
+                    {
+                        ResumeGame_Click(this, new RoutedEventArgs());
+                    }
                     break;
                 default:
                     return;
@@ -208,6 +217,38 @@ namespace Tetris
             gameState = new GameState();
             GameOverMenu.Visibility = Visibility.Hidden;
             await GameLoop();
+        }
+
+
+        // Pause Menu Logic
+        private void PauseGame()
+        {
+            PauseMenu.Visibility = Visibility.Visible;
+            // Pause game logic here
+        }
+
+        private void ResumeGame_Click(object sender, RoutedEventArgs e)
+        {
+            PauseMenu.Visibility = Visibility.Collapsed;
+            // Resume game logic here
+        }
+
+        private void RestartGame_Click(object sender, RoutedEventArgs e)
+        {
+            PauseMenu.Visibility = Visibility.Collapsed;
+            // Restart game logic here
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            // Open settings window or panel here
+        }
+
+        private void QuitToMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            PauseMenu.Visibility = Visibility.Collapsed;
+            // Logic to quit to the main menu
+            LoadMainMenu();
         }
     }
 }
