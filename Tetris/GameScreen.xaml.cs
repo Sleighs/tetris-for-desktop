@@ -52,6 +52,7 @@ namespace Tetris
         {
             InitializeComponent();
             imageControls = SetupGameCanvas(gameState.GameGrid);
+            this.Focus();
         }
 
         private Image[,] SetupGameCanvas(GameGrid grid)
@@ -157,55 +158,11 @@ namespace Tetris
             FinalScoreText.Text = $"Score: {gameState.Score}";
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
+        private GameState GetGameState()
         {
-            if (gameState.GameOver)
-            {
-                return;
-            }
-
-            switch (e.Key)
-            {
-                case Key.Left:
-                    gameState.MoveBlockLeft();
-                    break;
-                case Key.Right:
-                    gameState.MoveBlockRight();
-                    break;
-                case Key.Down:
-                    gameState.MoveBlockDown();
-                    break;
-                case Key.Up:
-                    gameState.RotateBlockCW();
-                    break;
-                case Key.Z:
-                    gameState.RotateBlockCCW();
-                    break;
-                case Key.C:
-                    gameState.HoldBlock();
-                    break;
-                case Key.Space:
-                    gameState.DropBlock();
-                    break;
-                case Key.Escape:
-                    // Open pause menu
-                    // pause game
-
-                    if (PauseMenu.Visibility == Visibility.Collapsed)
-                    {
-                        PauseGame();
-                    }     
-                    else
-                    {
-                        ResumeGame_Click(this, new RoutedEventArgs());
-                    }
-                    break;
-                default:
-                    return;
-            }
-
-            Draw(gameState);
+            return gameState;
         }
+       
 
         private async void GameCanvas_Loaded(object sender, RoutedEventArgs e)
         {
@@ -247,8 +204,63 @@ namespace Tetris
         private void QuitToMainMenu_Click(object sender, RoutedEventArgs e)
         {
             PauseMenu.Visibility = Visibility.Collapsed;
-            // Logic to quit to the main menu
-            LoadMainMenu();
+
+            ((MainWindow)Window.GetWindow(this)).LoadMainMenu();
+        }
+
+
+        // Key Bindings
+        private void Window_KeyDown(object sender, KeyEventArgs e, GameState gameState)
+        {
+            Console.WriteLine($"Key pressed: {e.Key}");
+
+            if (gameState.GameOver)
+            {
+                return;
+            }
+
+            switch (e.Key)
+            {
+                case Key.Left:
+                    gameState.MoveBlockLeft();
+                    break;
+                case Key.Right:
+                    gameState.MoveBlockRight();
+                    break;
+                case Key.Down:
+                    gameState.MoveBlockDown();
+                    break;
+                case Key.Up:
+                    gameState.RotateBlockCW();
+                    break;
+                case Key.Z:
+                    gameState.RotateBlockCCW();
+                    break;
+                case Key.C:
+                    gameState.HoldBlock();
+                    break;
+                case Key.Space:
+                    gameState.DropBlock();
+                    break;
+                case Key.Escape:
+                    // Open pause menu
+                    if (PauseMenu.Visibility == Visibility.Collapsed)
+                    {
+                        PauseGame();
+                        return;
+                    }
+                    else
+                    {
+                        ResumeGame_Click(this, new RoutedEventArgs());
+                    }
+                    break;
+                default:
+                    return;
+            }
+
+            e.Handled = true;
+
+            Draw(gameState);
         }
     }
 }

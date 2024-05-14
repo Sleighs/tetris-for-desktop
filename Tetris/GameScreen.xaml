@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:Tetris"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             KeyDown="Window_KeyDown"
-             >
+                          KeyDown="Window_KeyDown"
+>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

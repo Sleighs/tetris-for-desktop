@@ -24,7 +24,7 @@ namespace Tetris
             LoadMainMenu();
         }
 
-        private void LoadMainMenu()
+        public void LoadMainMenu()
         {
             // Load the main menu
             MainContent.Content = new MainMenu();
@@ -36,9 +36,25 @@ namespace Tetris
             MainContent.Content = new GameScreen(); // Switch to the game screen
         }
 
-        private void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-           
+       private void Window_KeyDown(object sender, KeyEventArgs e)
+       {
+             /*if (e.Key == Key.Escape)
+            {
+                if (MainContent.Content is GameScreen)
+                {
+                    // Handle specific logic for GameScreen
+                }
+                else if (MainContent.Content is MainMenu)
+                {
+                    // Possibly do nothing or handle a specific logic for MainMenu
+                }
+                else
+                {
+                    Application.Current.Shutdown();
+                }
+                e.Handled = true;
+             
+            }*/
         }
     }
 }

@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Tetris": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false,
+      "hotReloadEnabled": true
+    }
+  }
+}

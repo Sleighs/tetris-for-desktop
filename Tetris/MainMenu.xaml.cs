@@ -49,5 +49,15 @@ namespace Tetris
         {
             Application.Current.Shutdown(); // Closes the application
         }
+
+        /*private void MainMenu_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                // Quit the game
+                Application.Current.Shutdown();
+            }
+        }
+        */
     }
 }
