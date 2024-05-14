@@ -18,20 +18,20 @@ namespace Tetris
     /// </summary>
     public partial class MainWindow : Window
     {
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool AllocConsole();
+        //[DllImport("kernel32.dll", SetLastError = true)]
+        //[return: MarshalAs(UnmanagedType.Bool)]
+        //static extern bool AllocConsole();
 
 
-        public GameState GameState { get; private set; }
-        public GameScreen GameScreen { get; private set; }
+        //public GameState GameState { get; private set; }
+        //public GameScreen GameScreen { get; private set; }
 
 
         public MainWindow()
         {
             InitializeComponent();
             LoadMainMenu();
-            AllocConsole();
+            //AllocConsole();
         }
 
         public void LoadMainMenu()
@@ -54,6 +54,9 @@ namespace Tetris
 
             if (MainContent.Content is GameScreen gameScreen)
             {
+                bool isLeftPressed = false;
+                bool isRightPressed = false;
+
                 GameState gameState = gameScreen.gameState;
 
                 if (gameState.GameOver)

@@ -148,7 +148,7 @@ namespace Tetris
 
             while (!gameState.GameOver)
             {
-                await Task.Delay(500);
+                await Task.Delay(100);
                 gameState.MoveBlockDown();
                 Draw(gameState);
             }
