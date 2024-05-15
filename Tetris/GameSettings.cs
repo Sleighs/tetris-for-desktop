@@ -15,19 +15,8 @@ namespace Tetris
 
         }
 
-        // das and arr
+
         /*
-        public int ArrDelay { get; private set; }
-        public int DasDelay { get; private set; }
-
-        public bool isLeftPressed = false;
-        public bool isRightPressed = false;
-        private DateTime leftPressTime;
-        private DateTime rightPressTime;
-        public bool isDASActive = false;
-        private DateTime lastAutoShiftTime;
-
-
         void Update() {
             DateTime currentTime = DateTime.Now;
 

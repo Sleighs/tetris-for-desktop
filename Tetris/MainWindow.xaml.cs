@@ -18,10 +18,9 @@ namespace Tetris
     /// </summary>
     public partial class MainWindow : Window
     {
-        //[DllImport("kernel32.dll", SetLastError = true)]
-        //[return: MarshalAs(UnmanagedType.Bool)]
-        //static extern bool AllocConsole();
-
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
 
         //public GameState GameState { get; private set; }
         //public GameScreen GameScreen { get; private set; }
@@ -31,7 +30,7 @@ namespace Tetris
         {
             InitializeComponent();
             LoadMainMenu();
-            //AllocConsole();
+            AllocConsole();
         }
 
         public void LoadMainMenu()
@@ -52,12 +51,14 @@ namespace Tetris
             //System.Diagnostics.Debug.WriteLine("Key pressed: " + e.Key);
             //Console.WriteLine("Key pressed: " + e.Key);
 
+
             if (MainContent.Content is GameScreen gameScreen)
             {
-                bool isLeftPressed = false;
-                bool isRightPressed = false;
-
                 GameState gameState = gameScreen.gameState;
+                
+
+                //GameScreen.HandleHorizontalMovement(e, gameState);
+                //gameScreen.HandleHorizontalMovement(e, gameState);
 
                 if (gameState.GameOver)
                 {
@@ -67,9 +68,13 @@ namespace Tetris
                 switch (e.Key)
                 {
                     case Key.Left:
+                        gameState.isLeftPressed = true;
+                        gameScreen.HandleHorizontalMovement("left");
                         gameState.MoveBlockLeft();
                         break;
                     case Key.Right:
+                        gameState.isRightPressed = true;
+                        gameScreen.HandleHorizontalMovement("right");
                         gameState.MoveBlockRight();
                         break;
                     case Key.Down:

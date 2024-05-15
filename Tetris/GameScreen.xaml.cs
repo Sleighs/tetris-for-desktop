@@ -148,7 +148,13 @@ namespace Tetris
 
             while (!gameState.GameOver)
             {
-                await Task.Delay(100);
+                // Calculate dynamic fall delay
+                int fallDelay = CalculateFallDelay();
+
+                // Handle horizontal movements (DAS/ARR)
+                //HandleHorizontalMovement();
+
+                await Task.Delay(fallDelay);
                 gameState.MoveBlockDown();
                 Draw(gameState);
             }
@@ -157,6 +163,52 @@ namespace Tetris
             FinalScoreText.Text = $"Score: {gameState.Score}";
         }
 
+        public void HandleHorizontalMovement(string button)
+        {
+            DateTime now = DateTime.Now;
+
+            Console.WriteLine("Button Pressed:" + button);
+            Console.WriteLine("Left Pressed: " + gameState.isLeftPressed);
+            Console.WriteLine("Right Pressed: " + gameState.isRightPressed);
+
+
+           
+            if (gameState.isLeftPressed && gameState.leftPressTime.HasValue && (now - gameState.leftPressTime.Value) >= gameState.dasDelay)
+            {
+                if ((now - gameState.lastAutoShiftTime) >= gameState.arrDelay)
+                {
+                    gameState.lastAutoShiftTime = now;
+                    gameState.MoveBlockLeft();
+                }
+            }
+
+            if (gameState.isRightPressed && gameState.rightPressTime.HasValue && (now - gameState.rightPressTime.Value) >= gameState.dasDelay)
+            {
+                if ((now - gameState.lastAutoShiftTime) >= gameState.arrDelay)
+                {
+                    gameState.lastAutoShiftTime = now;
+                    gameState.MoveBlockRight();
+                }
+            }
+            /**/
+
+            
+            gameState.isLeftPressed = false;
+            gameState.isRightPressed = false;
+            
+        }
+
+        private int CalculateFallDelay()
+        {
+            int level = 1; //gameState.Level; // Assuming gameState has a Level property that increments
+            int baseDelay = 500;
+            int delayDecreasePerLevel = 25;
+            int minimumDelay = 100;
+            return Math.Max(
+                //baseDelay - (level - 1) * delayDecreasePerLevel, minimumDelay
+                baseDelay - (level * delayDecreasePerLevel), minimumDelay
+                );
+        }
         private async void GameCanvas_Loaded(object sender, RoutedEventArgs e)
         {
             await GameLoop();

@@ -36,6 +36,20 @@ namespace Tetris
         public Block HeldBlock { get; private set; }    
         public bool CanHold { get; private set; }
 
+        public bool isLeftPressed { get; internal set; }
+        public bool isRightPressed { get; internal set; }
+
+        public DateTime? leftPressTime { get; internal set; } = null;
+        public DateTime? rightPressTime { get; internal set; } = null;
+
+        public DateTime lastAutoShiftTime { get; internal set; }
+        public TimeSpan dasDelay = TimeSpan.FromMilliseconds(100);  // Delay before auto-repeat starts
+        public TimeSpan arrDelay = TimeSpan.FromMilliseconds(5);  // Auto-repeat rate
+
+        public int ArrDelay { get; internal set; }
+        public int DasDelay { get; internal set; }
+
+
         public GameState()
         {
             GameGrid = new GameGrid(22, 10);
@@ -43,6 +57,8 @@ namespace Tetris
             CurrentBlock = BlockQueue.GetAndUpdate();
             CanHold = true;
             GameStart = false;
+            isRightPressed = false;
+            isLeftPressed = false;
         }
 
         private bool BlockFits()
