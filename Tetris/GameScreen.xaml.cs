@@ -155,6 +155,7 @@ namespace Tetris
                 //HandleHorizontalMovement();
 
                 await Task.Delay(fallDelay);
+
                 gameState.MoveBlockDown();
                 Draw(gameState);
             }
