@@ -36,19 +36,21 @@ namespace Tetris
         public Block HeldBlock { get; private set; }    
         public bool CanHold { get; private set; }
 
-        public bool isLeftPressed { get; internal set; }
-        public bool isRightPressed { get; internal set; }
+        public bool IsLeftPressed { get; internal set; }
+        public bool IsRightPressed { get; internal set; }
 
-        public DateTime? leftPressTime { get; internal set; } = null;
-        public DateTime? rightPressTime { get; internal set; } = null;
+        public DateTime? LeftPressTime { get; internal set; } = null;
+        public DateTime? RightPressTime { get; internal set; } = null;
 
-        public DateTime lastAutoShiftTime { get; internal set; }
-        public TimeSpan dasDelay = TimeSpan.FromMilliseconds(100);  // Delay before auto-repeat starts
-        public TimeSpan arrDelay = TimeSpan.FromMilliseconds(5);  // Auto-repeat rate
+        public DateTime LastAutoShiftTime { get; internal set; }
+        public TimeSpan dasDelay = TimeSpan.FromMilliseconds(500);  // Delay before auto-repeat starts
+        public TimeSpan arrDelay = TimeSpan.FromMilliseconds(50);  // Auto-repeat rate
 
         public int ArrDelay { get; internal set; }
         public int DasDelay { get; internal set; }
+        public bool IsPlacingPieceAfterDelay { get; private set; } = false;
 
+        public bool CanDropNewBlock { get; internal set; } = true;
 
         public GameState()
         {
@@ -57,8 +59,8 @@ namespace Tetris
             CurrentBlock = BlockQueue.GetAndUpdate();
             CanHold = true;
             GameStart = false;
-            isRightPressed = false;
-            isLeftPressed = false;
+            IsRightPressed = false;
+            IsLeftPressed = false;
         }
 
         private bool BlockFits()
@@ -160,14 +162,21 @@ namespace Tetris
             }
         }
 
-        public void MoveBlockDown()
+        public async void MoveBlockDown()
         {
             CurrentBlock.Move(1, 0);
 
             if (!BlockFits())
             {
                 CurrentBlock.Move(-1, 0);
-                PlaceBlock();
+                IsPlacingPieceAfterDelay = true;
+
+                await Task.Delay(2000);
+                IsPlacingPieceAfterDelay = false;
+                if (!IsPlacingPieceAfterDelay)
+                {
+                    PlaceBlock();
+                }
             }
         }
 
@@ -195,10 +204,19 @@ namespace Tetris
             return drop;
         }
 
-        public void DropBlock()
+        public async void DropBlock()
         {
             CurrentBlock.Move(BlockDropDistance(), 0);
-            PlaceBlock();
+
+            // Wait before placing the block   
+            IsPlacingPieceAfterDelay = true;
+            await Task.Delay(2000);
+            IsPlacingPieceAfterDelay = false; // Reset the flag after the delay
+
+            if (!IsPlacingPieceAfterDelay) // Only place the block if the flag is false
+            {
+                PlaceBlock(); // Place the block after the delay
+            }
         }
     }
 }

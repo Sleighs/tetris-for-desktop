@@ -149,7 +149,7 @@ namespace Tetris
             while (!gameState.GameOver)
             {
                 // Calculate dynamic fall delay
-                int fallDelay = CalculateFallDelay();
+                int fallDelay = 500; //CalculateFallDelay();
 
                 // Handle horizontal movements (DAS/ARR)
                 //HandleHorizontalMovement();
@@ -167,12 +167,29 @@ namespace Tetris
         {
             DateTime now = DateTime.Now;
 
-            Console.WriteLine("Button Pressed:" + button);
-            Console.WriteLine("Left Pressed: " + gameState.isLeftPressed);
-            Console.WriteLine("Right Pressed: " + gameState.isRightPressed);
+            Console.WriteLine(button);
+            Console.WriteLine("Left Pressed: " + gameState.IsLeftPressed);
+            Console.WriteLine("Right Pressed: " + gameState.IsRightPressed);
+            Console.WriteLine("Left Press Time: " + gameState.LeftPressTime);
+            Console.WriteLine("Right Press Time: " + gameState.RightPressTime);
+            Console.WriteLine(now);
 
+            if (gameState.IsLeftPressed && gameState.IsRightPressed)
+            {
+                //gameState.IsLeftPressed = false;
+                //gameState.IsRightPressed = false;
+            }
 
-           
+            if (gameState.IsLeftPressed && gameState.LeftPressTime.HasValue)// && (now - gameState.LeftPressTime) >= gameState.dasDelay)
+            {
+                gameState.MoveBlockLeft();
+            }
+            if (gameState.IsRightPressed && gameState.RightPressTime.HasValue)// && (now - gameState.RightPressTime) >= gameState.dasDelay)
+            {
+                gameState.MoveBlockRight();
+            }
+
+           /*
             if (gameState.isLeftPressed && gameState.leftPressTime.HasValue && (now - gameState.leftPressTime.Value) >= gameState.dasDelay)
             {
                 if ((now - gameState.lastAutoShiftTime) >= gameState.arrDelay)
@@ -190,11 +207,10 @@ namespace Tetris
                     gameState.MoveBlockRight();
                 }
             }
-            /**/
+            */
 
-            
-            gameState.isLeftPressed = false;
-            gameState.isRightPressed = false;
+
+           
             
         }
 

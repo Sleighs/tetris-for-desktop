@@ -39,10 +39,31 @@ namespace Tetris
             MainContent.Content = new MainMenu();
         }
 
- 
         public void StartGame()
         {
             MainContent.Content = new GameScreen(); // Switch to the game screen
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (MainContent.Content is GameScreen gameScreen)
+            {
+                GameState gameState = gameScreen.gameState;
+
+                switch (e.Key)
+                {
+                    case Key.Left:
+                        gameState.LeftPressTime = null;
+                        gameState.IsLeftPressed = false;
+                        break;
+                    case Key.Right:
+                        gameState.RightPressTime = null;
+                        gameState.IsRightPressed = false;
+                        break;
+                    default:
+                        return;
+                }
+            }
         }
 
        private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -68,14 +89,24 @@ namespace Tetris
                 switch (e.Key)
                 {
                     case Key.Left:
-                        gameState.isLeftPressed = true;
+                        if (gameState.LeftPressTime == null)
+                        {
+                            gameState.LeftPressTime = DateTime.Now;
+                        }
+                        
+                        gameState.IsLeftPressed = true;
                         gameScreen.HandleHorizontalMovement("left");
-                        gameState.MoveBlockLeft();
+                        //gameState.MoveBlockLeft();
                         break;
                     case Key.Right:
-                        gameState.isRightPressed = true;
+                        if (gameState.RightPressTime == null)
+                        {
+                            gameState.RightPressTime = DateTime.Now;
+                        }
+                        
+                        gameState.IsRightPressed = true;
                         gameScreen.HandleHorizontalMovement("right");
-                        gameState.MoveBlockRight();
+                        //gameState.MoveBlockRight();
                         break;
                     case Key.Down:
                         gameState.MoveBlockDown();
