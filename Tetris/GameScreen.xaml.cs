@@ -151,9 +151,6 @@ namespace Tetris
                 // Calculate dynamic fall delay
                 int fallDelay = 500; //CalculateFallDelay();
 
-                // Handle horizontal movements (DAS/ARR)
-                //HandleHorizontalMovement();
-
                 await Task.Delay(fallDelay);
 
                 gameState.MoveBlockDown();
@@ -164,56 +161,6 @@ namespace Tetris
             FinalScoreText.Text = $"Score: {gameState.Score}";
         }
 
-        public void HandleHorizontalMovement(string button)
-        {
-            DateTime now = DateTime.Now;
-
-            Console.WriteLine(button);
-            Console.WriteLine("Left Pressed: " + gameState.IsLeftPressed);
-            Console.WriteLine("Right Pressed: " + gameState.IsRightPressed);
-            Console.WriteLine("Left Press Time: " + gameState.LeftPressTime);
-            Console.WriteLine("Right Press Time: " + gameState.RightPressTime);
-            Console.WriteLine(now);
-
-            if (gameState.IsLeftPressed && gameState.IsRightPressed)
-            {
-                //gameState.IsLeftPressed = false;
-                //gameState.IsRightPressed = false;
-            }
-
-            if (gameState.IsLeftPressed && gameState.LeftPressTime.HasValue)// && (now - gameState.LeftPressTime) >= gameState.dasDelay)
-            {
-                gameState.MoveBlockLeft();
-            }
-            if (gameState.IsRightPressed && gameState.RightPressTime.HasValue)// && (now - gameState.RightPressTime) >= gameState.dasDelay)
-            {
-                gameState.MoveBlockRight();
-            }
-
-           /*
-            if (gameState.isLeftPressed && gameState.leftPressTime.HasValue && (now - gameState.leftPressTime.Value) >= gameState.dasDelay)
-            {
-                if ((now - gameState.lastAutoShiftTime) >= gameState.arrDelay)
-                {
-                    gameState.lastAutoShiftTime = now;
-                    gameState.MoveBlockLeft();
-                }
-            }
-
-            if (gameState.isRightPressed && gameState.rightPressTime.HasValue && (now - gameState.rightPressTime.Value) >= gameState.dasDelay)
-            {
-                if ((now - gameState.lastAutoShiftTime) >= gameState.arrDelay)
-                {
-                    gameState.lastAutoShiftTime = now;
-                    gameState.MoveBlockRight();
-                }
-            }
-            */
-
-
-           
-            
-        }
 
         private int CalculateFallDelay()
         {
@@ -236,6 +183,12 @@ namespace Tetris
             gameState = new GameState();
             GameOverMenu.Visibility = Visibility.Hidden;
             await GameLoop();
+        }
+
+        private void QuitToMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.MainContent.Content = new MainMenu();
         }
 
 

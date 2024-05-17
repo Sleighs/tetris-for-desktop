@@ -169,7 +169,7 @@ namespace Tetris
             if (!BlockFits())
             {
                 CurrentBlock.Move(-1, 0);
-                IsPlacingPieceAfterDelay = true;
+                /*IsPlacingPieceAfterDelay = true;
 
                 await Task.Delay(2000);
                 IsPlacingPieceAfterDelay = false;
@@ -177,6 +177,8 @@ namespace Tetris
                 {
                     PlaceBlock();
                 }
+                */
+                PlaceBlock();
             }
         }
 
@@ -209,14 +211,15 @@ namespace Tetris
             CurrentBlock.Move(BlockDropDistance(), 0);
 
             // Wait before placing the block   
-            IsPlacingPieceAfterDelay = true;
+            /*IsPlacingPieceAfterDelay = true;
             await Task.Delay(2000);
             IsPlacingPieceAfterDelay = false; // Reset the flag after the delay
 
             if (!IsPlacingPieceAfterDelay) // Only place the block if the flag is false
             {
                 PlaceBlock(); // Place the block after the delay
-            }
+            }*/
+            PlaceBlock();
         }
     }
 }

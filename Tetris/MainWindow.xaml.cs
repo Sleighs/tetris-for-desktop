@@ -72,11 +72,10 @@ namespace Tetris
             //System.Diagnostics.Debug.WriteLine("Key pressed: " + e.Key);
             //Console.WriteLine("Key pressed: " + e.Key);
 
-
             if (MainContent.Content is GameScreen gameScreen)
             {
                 GameState gameState = gameScreen.gameState;
-                
+                InputHandler inputHandler = new InputHandler(gameState);      
 
                 //GameScreen.HandleHorizontalMovement(e, gameState);
                 //gameScreen.HandleHorizontalMovement(e, gameState);
@@ -89,24 +88,26 @@ namespace Tetris
                 switch (e.Key)
                 {
                     case Key.Left:
-                        if (gameState.LeftPressTime == null)
+                        /*if (gameState.LeftPressTime == null)
                         {
                             gameState.LeftPressTime = DateTime.Now;
                         }
                         
                         gameState.IsLeftPressed = true;
                         gameScreen.HandleHorizontalMovement("left");
-                        //gameState.MoveBlockLeft();
+                        */
+                        inputHandler.OnKeyDown("game", "left");
                         break;
                     case Key.Right:
-                        if (gameState.RightPressTime == null)
+                        /*if (gameState.RightPressTime == null)
                         {
                             gameState.RightPressTime = DateTime.Now;
                         }
                         
                         gameState.IsRightPressed = true;
                         gameScreen.HandleHorizontalMovement("right");
-                        //gameState.MoveBlockRight();
+                        */
+                        inputHandler.OnKeyDown("game", "right");
                         break;
                     case Key.Down:
                         gameState.MoveBlockDown();
@@ -177,7 +178,7 @@ namespace Tetris
             // Open settings window or panel here
         }
 
-        private void QuitToMainMenu_Click(object sender, RoutedEventArgs e)
+        public void QuitToMainMenu_Click(object sender, RoutedEventArgs e)
         {
             PauseMenu.Visibility = Visibility.Collapsed;
 
