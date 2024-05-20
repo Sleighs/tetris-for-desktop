@@ -49,6 +49,37 @@ namespace Tetris.Views
             MainContent.Content = new GameScreen(); // Switch to the game screen
         }
 
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (MainContent.Content is GameScreen gameScreen)
+            {
+                GameState gameState = gameScreen.gameState;
+                InputHandler inputHandler = new InputHandler(gameState);
+
+                switch (e.Key)
+                {
+                    case Key.Left:
+                        gameState.IsLeftPressed = false;
+                        gameState.LeftPressTime = null;
+                        break;
+                    case Key.Right:
+                        gameState.IsRightPressed = false;
+                        gameState.RightPressTime = null;
+                        break;
+                    case Key.Down:
+                        gameState.IsDownPressed = false;
+                        break;
+                    case Key.Space:
+                        gameState.IsSpacePressed = false;
+                        break;
+                    default:
+                        return;
+                }
+
+                //gameScreen.Draw(gameState);
+            }
+        }
+
        private void Window_KeyDown(object sender, KeyEventArgs e)
        {
             // Log key press
@@ -57,16 +88,8 @@ namespace Tetris.Views
 
             if (MainContent.Content is GameScreen gameScreen)
             {
-<<<<<<< Updated upstream:Tetris/MainWindow.xaml.cs
-                bool isLeftPressed = false;
-                bool isRightPressed = false;
-=======
-                //GameState gameState = gameScreen.gameState;
-                GameState gameState = new();
-                InputHandler inputHandler = new InputHandler(gameState);      
->>>>>>> Stashed changes:Tetris/Views/MainWindow.xaml.cs
-
                 GameState gameState = gameScreen.gameState;
+                InputHandler inputHandler = new InputHandler(gameState);      
 
                 if (gameState.GameOver)
                 {
@@ -76,17 +99,10 @@ namespace Tetris.Views
                 switch (e.Key)
                 {
                     case Key.Left:
-<<<<<<< Updated upstream:Tetris/MainWindow.xaml.cs
-                        gameState.MoveBlockLeft();
-                        break;
-                    case Key.Right:
-                        gameState.MoveBlockRight();
-=======
                         inputHandler.OnKeyDown("game", "left");
                         break;
                     case Key.Right:
                         inputHandler.OnKeyDown("game", "right");
->>>>>>> Stashed changes:Tetris/Views/MainWindow.xaml.cs
                         break;
                     case Key.Down:
                         gameState.MoveBlockDown();
@@ -120,7 +136,7 @@ namespace Tetris.Views
                         return;
                 }
 
-                //gameScreen.Draw(gameState);
+                gameScreen.Draw(gameState);
             } 
             
             else if (MainContent.Content is MainMenu)

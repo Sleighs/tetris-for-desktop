@@ -10,17 +10,12 @@
         Foreground="White"
         FontFamily="Segoe UI Light" FontSize="28"
         KeyDown="Window_KeyDown"
-<<<<<<< Updated upstream:Tetris/MainWindow.xaml
-
-=======
         KeyUp="Window_KeyUp"
->>>>>>> Stashed changes:Tetris/Views/MainWindow.xaml
     >
     <Grid>
         <ContentControl Name="MainContent"/>
 
         <!--local:GameScreen x:Name="gameScreen" /-->
-
 
         <Grid x:Name="PauseMenu" Visibility="Collapsed">
             <Rectangle Fill="#7F000000" />

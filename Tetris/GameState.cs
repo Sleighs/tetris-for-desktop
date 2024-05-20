@@ -36,6 +36,13 @@ namespace Tetris
         public int Score { get; private set; }
         public Block HeldBlock { get; private set; }    
         public bool CanHold { get; private set; }
+        public bool IsLeftPressed { get; internal set; }
+        public bool IsRightPressed { get; internal set; }
+        public bool IsDownPressed { get; internal set; }
+        public bool IsSpacePressed { get; internal set; }
+
+        public DateTime? LeftPressTime { get; internal set; }
+        public DateTime? RightPressTime { get; internal set; }
 
         public GameState()
         {
@@ -44,6 +51,10 @@ namespace Tetris
             CurrentBlock = BlockQueue.GetAndUpdate();
             CanHold = true;
             GameStart = false;
+            IsLeftPressed = false;
+            IsRightPressed = false;
+            IsDownPressed = false;
+            IsSpacePressed = false;
         }
 
         private bool BlockFits()

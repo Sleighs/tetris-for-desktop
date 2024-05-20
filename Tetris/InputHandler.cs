@@ -14,12 +14,11 @@ namespace Tetris
     public class InputHandler
     {
         private GameState gameState;
-        private GameScreen gameScreen;
+        //private GameScreen gameScreen;
 
-        public InputHandler(GameState gameState, GameScreen gameScreen)
+        public InputHandler(GameState gameState)
         {
             this.gameState = gameState;
-            this.gameScreen = gameScreen;
         }
 
         /*public bool IsLeftPressed { get; internal set; }
@@ -41,11 +40,12 @@ namespace Tetris
 
         private void OnKeyUp(string screenType, string keyPressed)    
         {
-            if (gameState.IsLeftPressed && gameState.IsRightPressed)
+            /*if (gameState.IsLeftPressed && gameState.IsRightPressed)
             {
                 //gameState.IsLeftPressed = false;
                 //gameState.IsRightPressed = false;
             }
+            */
         }
 
         public void OnKeyDown(string screenType, string keyPressed)

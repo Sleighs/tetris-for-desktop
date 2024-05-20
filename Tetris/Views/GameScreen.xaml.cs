@@ -145,44 +145,17 @@ namespace Tetris.Views
             ScoreText.Text = $"Score: {gameState.Score}";
         }
 
-        private async Task InputObserver()
-        {
-            while (!gameState.GameOver)
-            {
-                
-                //await Task.Delay(10);
-
-               // Draw(gameState);
-
-               /* if (gameState.IsLeftPressed)
-                {
-                    gameState.MoveBlockLeft();
-                    Draw(gameState);
-                }
-
-                if (gameState.IsRightPressed)
-                {
-                    gameState.MoveBlockRight();
-                    Draw(gameState);
-                }*/
-            }
-        }
-
         private async Task GameLoop()
         {
             Draw(gameState);
 
             while (!gameState.GameOver)
             {
-<<<<<<< Updated upstream:Tetris/GameScreen.xaml.cs
-                await Task.Delay(100);
-=======
                 int fallDelay = 1000; 
                 //CalculateFallDelay();
 
                 await Task.Delay(fallDelay);
 
->>>>>>> Stashed changes:Tetris/Views/GameScreen.xaml.cs
                 gameState.MoveBlockDown();
 
                 Draw(gameState);
@@ -191,9 +164,6 @@ namespace Tetris.Views
             GameOverMenu.Visibility = Visibility.Visible;
             FinalScoreText.Text = $"Score: {gameState.Score}";
         }
-
-<<<<<<< Updated upstream:Tetris/GameScreen.xaml.cs
-=======
 
         private int CalculateFallDelay()
         {
@@ -207,10 +177,8 @@ namespace Tetris.Views
                 );
         }
 
->>>>>>> Stashed changes:Tetris/Views/GameScreen.xaml.cs
         private async void GameCanvas_Loaded(object sender, RoutedEventArgs e)
         {
-            //await InputObserver();
             await GameLoop();
         }
 
