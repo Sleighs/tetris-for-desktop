@@ -12,8 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tetris;
+using Tetris.Models;
 
-namespace Tetris
+
+namespace Tetris.Views
 {
     /// <summary>
     /// Interaction logic for GameScreen.xaml
@@ -22,26 +25,26 @@ namespace Tetris
     {
         private readonly ImageSource[] tileImages = new ImageSource[]
         {
-            new BitmapImage(new Uri("Assets/TileEmpty.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/TileCyan.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/TileBlue.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/TileOrange.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/TileYellow.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/TileGreen.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/TilePurple.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/TileRed.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/TileEmpty.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/TileCyan.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/TileBlue.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/TileOrange.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/TileYellow.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/TileGreen.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/TilePurple.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/TileRed.png", UriKind.Relative)),
         };
 
         private readonly ImageSource[] blockImages = new ImageSource[]
         {
-            new BitmapImage(new Uri("Assets/Block-Empty.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/Block-I.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/Block-J.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/Block-L.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/Block-O.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/Block-S.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/Block-T.png", UriKind.Relative)),
-            new BitmapImage(new Uri("Assets/Block-Z.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/Block-Empty.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/Block-I.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/Block-J.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/Block-L.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/Block-O.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/Block-S.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/Block-T.png", UriKind.Relative)),
+            new BitmapImage(new Uri("/Assets/Block-Z.png", UriKind.Relative)),
         };
 
         private readonly Image[,] imageControls;
@@ -142,14 +145,46 @@ namespace Tetris
             ScoreText.Text = $"Score: {gameState.Score}";
         }
 
+        private async Task InputObserver()
+        {
+            while (!gameState.GameOver)
+            {
+                
+                //await Task.Delay(10);
+
+               // Draw(gameState);
+
+               /* if (gameState.IsLeftPressed)
+                {
+                    gameState.MoveBlockLeft();
+                    Draw(gameState);
+                }
+
+                if (gameState.IsRightPressed)
+                {
+                    gameState.MoveBlockRight();
+                    Draw(gameState);
+                }*/
+            }
+        }
+
         private async Task GameLoop()
         {
             Draw(gameState);
 
             while (!gameState.GameOver)
             {
+<<<<<<< Updated upstream:Tetris/GameScreen.xaml.cs
                 await Task.Delay(100);
+=======
+                int fallDelay = 1000; 
+                //CalculateFallDelay();
+
+                await Task.Delay(fallDelay);
+
+>>>>>>> Stashed changes:Tetris/Views/GameScreen.xaml.cs
                 gameState.MoveBlockDown();
+
                 Draw(gameState);
             }
 
@@ -157,8 +192,25 @@ namespace Tetris
             FinalScoreText.Text = $"Score: {gameState.Score}";
         }
 
+<<<<<<< Updated upstream:Tetris/GameScreen.xaml.cs
+=======
+
+        private int CalculateFallDelay()
+        {
+            int level = 1; //gameState.Level; // Assuming gameState has a Level property that increments
+            int baseDelay = 500;
+            int delayDecreasePerLevel = 25;
+            int minimumDelay = 100;
+            return Math.Max(
+                //baseDelay - (level - 1) * delayDecreasePerLevel, minimumDelay
+                baseDelay - (level * delayDecreasePerLevel), minimumDelay
+                );
+        }
+
+>>>>>>> Stashed changes:Tetris/Views/GameScreen.xaml.cs
         private async void GameCanvas_Loaded(object sender, RoutedEventArgs e)
         {
+            //await InputObserver();
             await GameLoop();
         }
 

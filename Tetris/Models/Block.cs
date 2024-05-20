@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.InteropServices.Marshalling;
-
+using Tetris.Models;
 
 namespace Tetris
 {

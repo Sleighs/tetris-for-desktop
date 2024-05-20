@@ -1,5 +1,5 @@
 ﻿using System;
-using Tetris.Blocks;
+using Tetris.Models;
 
 namespace Tetris
 {

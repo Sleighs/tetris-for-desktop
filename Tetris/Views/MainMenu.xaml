@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Tetris.MainMenu"
+﻿<UserControl x:Class="Tetris.Views.MainMenu"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,7 @@
              >
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="Assets/Background.png"/>
+            <ImageBrush ImageSource="../Assets/Background.png"/>
         </Grid.Background>
         
         <TextBlock Text="Main Menu" Foreground="White" FontSize="24" Margin="10" HorizontalAlignment="Center"/>

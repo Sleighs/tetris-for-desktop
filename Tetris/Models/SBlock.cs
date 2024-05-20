@@ -1,4 +1,4 @@
-﻿namespace Tetris.Blocks
+﻿namespace Tetris.Models
 {
     public class SBlock : Block
     {

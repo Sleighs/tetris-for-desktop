@@ -10,8 +10,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tetris;
+using Tetris.Models;
 
-namespace Tetris
+
+namespace Tetris.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -54,8 +57,14 @@ namespace Tetris
 
             if (MainContent.Content is GameScreen gameScreen)
             {
+<<<<<<< Updated upstream:Tetris/MainWindow.xaml.cs
                 bool isLeftPressed = false;
                 bool isRightPressed = false;
+=======
+                //GameState gameState = gameScreen.gameState;
+                GameState gameState = new();
+                InputHandler inputHandler = new InputHandler(gameState);      
+>>>>>>> Stashed changes:Tetris/Views/MainWindow.xaml.cs
 
                 GameState gameState = gameScreen.gameState;
 
@@ -67,10 +76,17 @@ namespace Tetris
                 switch (e.Key)
                 {
                     case Key.Left:
+<<<<<<< Updated upstream:Tetris/MainWindow.xaml.cs
                         gameState.MoveBlockLeft();
                         break;
                     case Key.Right:
                         gameState.MoveBlockRight();
+=======
+                        inputHandler.OnKeyDown("game", "left");
+                        break;
+                    case Key.Right:
+                        inputHandler.OnKeyDown("game", "right");
+>>>>>>> Stashed changes:Tetris/Views/MainWindow.xaml.cs
                         break;
                     case Key.Down:
                         gameState.MoveBlockDown();
@@ -79,6 +95,7 @@ namespace Tetris
                         gameState.RotateBlockCW();
                         break;
                     case Key.Z:
+                    case Key.RightCtrl:
                         gameState.RotateBlockCCW();
                         break;
                     case Key.C:
@@ -103,7 +120,7 @@ namespace Tetris
                         return;
                 }
 
-                gameScreen.Draw(gameState);
+                //gameScreen.Draw(gameState);
             } 
             
             else if (MainContent.Content is MainMenu)

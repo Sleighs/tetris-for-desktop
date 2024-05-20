@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Automation.Peers;
+using Tetris.Models;
 
 namespace Tetris
 {

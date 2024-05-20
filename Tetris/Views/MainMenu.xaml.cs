@@ -12,8 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Tetris;
+using Tetris.Models;
 
-namespace Tetris
+
+namespace Tetris.Views
 {
     /// <summary>
     /// Interaction logic for MainMenu.xaml
