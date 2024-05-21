@@ -21,9 +21,9 @@ namespace Tetris.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        //[DllImport("kernel32.dll", SetLastError = true)]
-        //[return: MarshalAs(UnmanagedType.Bool)]
-        //static extern bool AllocConsole();
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
 
 
         //public GameState GameState { get; private set; }
@@ -34,7 +34,7 @@ namespace Tetris.Views
         {
             InitializeComponent();
             LoadMainMenu();
-            //AllocConsole();
+            AllocConsole();
         }
 
         public void LoadMainMenu()
@@ -54,7 +54,7 @@ namespace Tetris.Views
             if (MainContent.Content is GameScreen gameScreen)
             {
                 GameState gameState = gameScreen.gameState;
-                InputHandler inputHandler = new InputHandler(gameState);
+                //InputHandler inputHandler = new InputHandler(gameState);
 
                 switch (e.Key)
                 {
@@ -121,7 +121,7 @@ namespace Tetris.Views
                         gameState.DropBlock();
                         break;
                     case Key.Escape:
-                        // Open pause menu
+                        // Open and close pause menu
                         if (PauseMenu.Visibility == Visibility.Collapsed)
                         {
                             PauseGame();
@@ -130,6 +130,7 @@ namespace Tetris.Views
                         else
                         {
                             ResumeGame_Click(this, new RoutedEventArgs());
+                            return;
                         }
                         break;
                     default:
@@ -155,12 +156,16 @@ namespace Tetris.Views
         {
             PauseMenu.Visibility = Visibility.Visible;
             // Pause game logic here
+            GameState gameState = ((GameScreen)MainContent.Content).gameState;
+            gameState.IsPaused = true;
         }
 
         private void ResumeGame_Click(object sender, RoutedEventArgs e)
         {
             PauseMenu.Visibility = Visibility.Collapsed;
             // Resume game logic here
+            GameState gameState = ((GameScreen)MainContent.Content).gameState;
+            gameState.IsPaused = false;
         }
 
         private void RestartGame_Click(object sender, RoutedEventArgs e)

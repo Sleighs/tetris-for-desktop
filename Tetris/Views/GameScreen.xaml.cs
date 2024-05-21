@@ -151,14 +151,17 @@ namespace Tetris.Views
 
             while (!gameState.GameOver)
             {
-                int fallDelay = 1000; 
+                int fallDelay = 1000;
                 //CalculateFallDelay();
-
+                
                 await Task.Delay(fallDelay);
 
-                gameState.MoveBlockDown();
-
-                Draw(gameState);
+                if (!gameState.IsPaused)
+                { 
+                    gameState.MoveBlockDown();
+                    
+                    Draw(gameState);
+                }
             }
 
             GameOverMenu.Visibility = Visibility.Visible;

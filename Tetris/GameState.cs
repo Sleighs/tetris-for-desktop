@@ -32,7 +32,8 @@ namespace Tetris
         public BlockQueue BlockQueue { get; }
 
         public bool GameStart { get; private set; }
-        public bool GameOver { get; private set; }
+        public bool GameOver { get; private set; } 
+        public bool IsPaused { get; internal set; }
         public int Score { get; private set; }
         public Block HeldBlock { get; private set; }    
         public bool CanHold { get; private set; }
@@ -55,6 +56,7 @@ namespace Tetris
             IsRightPressed = false;
             IsDownPressed = false;
             IsSpacePressed = false;
+            IsPaused = false;   
         }
 
         private bool BlockFits()

@@ -10,8 +10,7 @@
         Foreground="White"
         FontFamily="Segoe UI Light" FontSize="28"
         KeyDown="Window_KeyDown"
-        KeyUp="Window_KeyUp"
-    >
+        KeyUp="Window_KeyUp">
     <Grid>
         <ContentControl Name="MainContent"/>
 

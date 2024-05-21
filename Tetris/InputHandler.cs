@@ -83,7 +83,6 @@ namespace Tetris
             DateTime now = DateTime.Now;
 
             Console.WriteLine(button);
-            
             Console.WriteLine("Left Pressed: " + gameState.IsLeftPressed);
             Console.WriteLine("Right Pressed: " + gameState.IsRightPressed);
             Console.WriteLine("Left Press Time: " + gameState.LeftPressTime);
