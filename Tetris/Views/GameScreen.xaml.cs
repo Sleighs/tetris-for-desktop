@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Tetris;
 using Tetris.Models;
 
@@ -51,10 +52,36 @@ namespace Tetris.Views
 
         public GameState gameState = new GameState();
 
+        private Dictionary<Key, bool> keyStates = new Dictionary<Key, bool>();
+        private DispatcherTimer gameLoopTimer;
+        //private Game game;
+
         public GameScreen()
         {
             InitializeComponent();
             imageControls = SetupGameCanvas(gameState.GameGrid);
+            InitializeGame();
+        }
+
+        private void InitializeGame()
+        {
+            /*
+            this.Loaded += GameScreen_Loaded;
+            this.Unloaded += GameScreen_Unloaded;
+
+            // Set up key event handlers
+            this.KeyDown += OnKeyDown;
+            this.KeyUp += OnKeyUp;
+            this.Focusable = true;
+            this.Focus();
+
+            // Initialize game and game loop
+            game = new Game(keyStates);
+
+            gameLoopTimer = new DispatcherTimer();
+            gameLoopTimer.Interval = TimeSpan.FromMilliseconds(16); // ~60 FPS
+            gameLoopTimer.Tick += GameLoop;
+            */
         }
 
         private Image[,] SetupGameCanvas(GameGrid grid)
