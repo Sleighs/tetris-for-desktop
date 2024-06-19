@@ -77,12 +77,14 @@ namespace Tetris.Views
 
             // Initialize game and game loop
             game = new Game(keyStates);
-
+*/
             gameLoopTimer = new DispatcherTimer();
             gameLoopTimer.Interval = TimeSpan.FromMilliseconds(16); // ~60 FPS
             gameLoopTimer.Tick += GameLoop;
-            */
+            
         }
+
+
 
         private Image[,] SetupGameCanvas(GameGrid grid)
         {
@@ -225,5 +227,10 @@ namespace Tetris.Views
             this.Focus();
         }
 
+        private void GameLoop(object sender, EventArgs e)
+        {
+            //game.Update();
+            // Optionally, you can also call InvalidateVisual or other methods to update the UI
+        }
     }
 }
